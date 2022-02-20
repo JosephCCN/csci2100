@@ -75,12 +75,12 @@ void del(HashTbADT this, char* key) {
         else exit(1);
 }
 
-void showall(HashTbADT this, char* key ) {
-        int code = hash(key);
-        node cp = this->bucket[code];
-        while(cp != NULL) {
-                printf("%d ", cp->value);
-                cp = cp->next;
+void forAllElement(func f, HashTbADT this) {
+        for(int i=0;i<100;i++) {
+                node k = this->bucket[i];
+                while(k != NULL) {
+                        f(k->value, k->key);
+                        k = k->next;
+                }
         }
-        printf("\n");
 }

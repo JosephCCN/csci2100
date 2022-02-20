@@ -13,9 +13,10 @@ struct HashTB{
 };
 
 typedef struct HashTB *HashTbADT;
+typedef void (*func)(int, char*);
 
 HashTbADT newHashTable();
 void insert(HashTbADT, char*, int);
 int find(HashTbADT, char*);
 void del(HashTbADT, char*);
-void showall(HashTbADT, char*);
+void forAllElement(func, HashTbADT);
