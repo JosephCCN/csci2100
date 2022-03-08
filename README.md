@@ -1,3 +1,3 @@
 # csci2100
-Record of learning data structures by myself  
+Record of learning data structures  
 feel free to use it
