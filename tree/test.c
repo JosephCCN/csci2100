@@ -5,7 +5,7 @@
 int main(){
         BinaryTreeADT t = EmptyBinaryTree();
         t = insertNode(newNode("test", 1), t);
-        t = insertNode(newNode("hi", 9), t);
-        TreeNodeADT n = Root(t);
+        t = insertNode(newNode("hi", 4) ,t);
+        TreeNodeADT n = findNode(t, "hi");
         printf("%d", GetNodeData(n));
 }

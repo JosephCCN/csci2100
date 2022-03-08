@@ -1,6 +1,6 @@
 typedef struct BinaryTreeCDT *BinaryTreeADT;
 typedef struct TreeNodeCDT *TreeNodeADT;
-#define specialErrNode (TreeNodeADT) NULL;
+#define specialErrNode (TreeNodeADT) NULL
 
 BinaryTreeADT NonemptyBinaryTree(TreeNodeADT, BinaryTreeADT, BinaryTreeADT);
 BinaryTreeADT EmptyBinaryTree();

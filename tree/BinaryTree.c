@@ -31,12 +31,12 @@ int TreeIsEmpty(BinaryTreeADT t){
 }
 
 BinaryTreeADT LeftSubtree(BinaryTreeADT t) {
-        if(TreeIsEmpty(t) || TreeIsEmpty(t->left)) exit(EXIT_FAILURE);
+        if(TreeIsEmpty(t) || TreeIsEmpty(t->left)) return EmptyBinaryTree();
         return t->left;
 }
 
 BinaryTreeADT RightSubtree(BinaryTreeADT t) {
-        if(TreeIsEmpty(t) || TreeIsEmpty(t->right)) exit(EXIT_FAILURE);
+        if(TreeIsEmpty(t) || TreeIsEmpty(t->right)) return EmptyBinaryTree();
         return t->right;
 }
 
@@ -62,23 +62,23 @@ int GetNodeData(TreeNodeADT t) {
         return t->nodeData;
 }
 
-BinaryTreeADT nodeToTree(TreeNodeADT node) {
+BinaryTreeADT MergeTree(TreeNodeADT node, BinaryTreeADT left, BinaryTreeADT right) {
         BinaryTreeADT tree = (BinaryTreeADT)malloc(sizeof(*tree));
         tree->node = node;
-        tree->left = tree->right = NULL;
+        tree->left = left;
+        tree->right = right;
         return tree;
 }
 
 BinaryTreeADT insertNode(TreeNodeADT node, BinaryTreeADT tree){
-        if(TreeIsEmpty(tree)) tree = nodeToTree(node);
-        else if(strcmp(node->key, tree->node->key) > 0) tree->right = insertNode(node, tree->right);
-        else tree->left = insertNode(node, tree->left);
-        return tree;
+        if(TreeIsEmpty(tree)) return MergeTree(node, EmptyBinaryTree(), EmptyBinaryTree());
+        else if(strcmp(node->key, tree->node->key) > 0) return MergeTree(Root(tree), LeftSubtree(tree), insertNode(node, tree->right));
+        else return MergeTree(Root(tree), insertNode(node, tree->left), RightSubtree(tree));
 }
 
 TreeNodeADT findNode(BinaryTreeADT tree, char* key) {
         if(TreeIsEmpty(tree)) return specialErrNode;
-        int s = strcmp(tree->node->key, key);
+        int s = strcmp(key, tree->node->key);
         if(s == 0) return tree->node;
         if(s < 0) return findNode(tree->left, key);
         else return findNode(tree->right, key);
