@@ -13,7 +13,7 @@ listADT emptylist() {
         return ((listADT)NULL);
 }
 
-listADT con(int a, listADT this) {
+listADT cons(int a, listADT this) {
     listADT t = (listADT)malloc(sizeof(*t));
     t->head = a;
     t->tail = this;
